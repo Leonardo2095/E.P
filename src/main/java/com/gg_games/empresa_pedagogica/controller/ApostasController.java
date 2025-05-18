@@ -1,10 +1,11 @@
-package com.gg_games.empresa_pedagogica.model;
+package com.gg_games.empresa_pedagogica.controller;
 
+import com.gg_games.empresa_pedagogica.model.ApostadorModel;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_apostas")
-public class ApostasModel {
+public class ApostasController {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -17,10 +18,10 @@ public class ApostasModel {
     @JoinColumn(name = "gamblerID")
     private ApostadorModel gambler;
 
-    public ApostasModel() {
+    public ApostasController() {
     }
 
-    public ApostasModel(float gambleValue) {
+    public ApostasController(float gambleValue) {
         this.gambleValue = gambleValue;
     }
 

@@ -1,4 +1,4 @@
-package com.gg_games.empresa_pedagogica.model;
+package com.gg_games.empresa_pedagogica.controller;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_torneio")
-public class TorneioModel {
+public class TorneioController {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tournamentID;
@@ -19,10 +19,10 @@ public class TorneioModel {
     @OneToMany(mappedBy = "tournaments")
     private List<CompetitorModel> competitor;
 
-    public TorneioModel(){
+    public TorneioController(){
     }
 
-    public TorneioModel(String data, String rules, List<CompetitorModel> competitor) {
+    public TorneioController(String data, String rules, List<CompetitorModel> competitor) {
         this.data = data;
         this.rules = rules;
         this.competitor = competitor;

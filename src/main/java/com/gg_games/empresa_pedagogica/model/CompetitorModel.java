@@ -18,6 +18,10 @@ public class CompetitorModel {
     @Column(nullable = false)
     private String paymentStatus= "Devendo";
 
+    @ManyToOne
+    @JoinColumn(name = "tournamentID")
+    private CompetitorModel competitor;
+
     public CompetitorModel() {
 
     }
