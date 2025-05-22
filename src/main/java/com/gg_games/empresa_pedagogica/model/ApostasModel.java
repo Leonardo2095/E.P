@@ -2,6 +2,8 @@ package com.gg_games.empresa_pedagogica.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tb_apostas")
 public class ApostasModel {
@@ -17,11 +19,48 @@ public class ApostasModel {
     @JoinColumn(name = "gamblerID")
     private ApostadorModel gambler;
 
+    @ManyToOne
+    @JoinColumn(name = "competitorID")
+    private CompetitorModel competitor;
+
+    @ManyToOne
+    @JoinColumn(name = "admimID")
+    private AdmimModel admim;
+    private LocalDateTime dateTime;
+
+
     public ApostasModel() {
     }
 
-    public ApostasModel(float gambleValue) {
+    public ApostasModel(float gambleValue, ApostadorModel gambler, CompetitorModel competitor, AdmimModel admim) {
         this.gambleValue = gambleValue;
+        this.gambler = gambler;
+        this.competitor = competitor;
+        this.admim = admim;
+    }
+
+    public ApostadorModel getGambler() {
+        return gambler;
+    }
+
+    public void setGambler(ApostadorModel gambler) {
+        this.gambler = gambler;
+    }
+
+    public CompetitorModel getCompetitor() {
+        return competitor;
+    }
+
+    public void setCompetitor(CompetitorModel competitor) {
+        this.competitor = competitor;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public float getGambleValue() {

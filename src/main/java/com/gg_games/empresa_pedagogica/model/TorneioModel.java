@@ -16,16 +16,29 @@ public class TorneioModel {
     private String data;
     private String rules;
 
-    @OneToMany(mappedBy = "tournaments")
+    @OneToMany(mappedBy = "tournament")
     private List<CompetitorModel> competitor;
 
+    @ManyToOne
+    @JoinColumn(name = "admimID")
+    private AdmimModel admim;
     public TorneioModel(){
     }
 
-    public TorneioModel(String data, String rules, List<CompetitorModel> competitor) {
+
+    public TorneioModel(String data, String rules, List<CompetitorModel> competitor, AdmimModel admim) {
         this.data = data;
         this.rules = rules;
         this.competitor = competitor;
+        this.admim = admim;
+    }
+
+    public AdmimModel getAdmim() {
+        return admim;
+    }
+
+    public void setAdmim(AdmimModel admim) {
+        this.admim = admim;
     }
 
     public List<CompetitorModel> getCompetitor() {

@@ -18,12 +18,25 @@ public class PostModel {
 
     private LocalDate postData;
 
+    @ManyToOne
+    @JoinColumn(name = "admimID")
+    private AdmimModel admim;
+
     public PostModel() {
     }
 
-    public PostModel(String postTitle, String postContent) {
+    public PostModel(String postTitle, String postContent, AdmimModel admim) {
         this.postTitle = postTitle;
         this.postContent = postContent;
+        this.admim = admim;
+    }
+
+    public AdmimModel getAdmim() {
+        return admim;
+    }
+
+    public void setAdmim(AdmimModel admim) {
+        this.admim = admim;
     }
 
     public Long getPostID() {

@@ -1,8 +1,7 @@
 package com.gg_games.empresa_pedagogica.model;
 
-import com.gg_games.empresa_pedagogica.dto.ApostadorCreateDTO;
 import jakarta.persistence.*;
-import org.springframework.beans.BeanUtils;
+
 
 import java.util.List;
 
@@ -26,16 +25,26 @@ public class ApostadorModel {
     @OneToMany(mappedBy = "gambler")
     private List<ApostasModel> gambles;
 
-    public ApostadorModel(ApostadorCreateDTO gambler){
-        BeanUtils.copyProperties(gambler, this);
-    }
+    @ManyToOne
+    @JoinColumn(name= "admimID")
+    private AdmimModel admim;
 
-    public ApostadorModel(String gamblerName, String gamblerClassroom, String gamblerPassword, String gamblerPix, List<ApostasModel> gambles) {
+
+    public ApostadorModel(String gamblerName, String gamblerClassroom, String gamblerPassword, String gamblerPix, List<ApostasModel> gambles, AdmimModel admim) {
         this.gamblerName = gamblerName;
         this.gamblerClassroom = gamblerClassroom;
         this.gamblerPassword = gamblerPassword;
         this.gamblerPix = gamblerPix;
         this.gambles = gambles;
+        this.admim = admim;
+    }
+
+    public AdmimModel getAdmim() {
+        return admim;
+    }
+
+    public void setAdmim(AdmimModel admim) {
+        this.admim = admim;
     }
 
     public ApostadorModel() {

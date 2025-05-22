@@ -2,6 +2,8 @@ package com.gg_games.empresa_pedagogica.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name= "tb_competitor")
 public class CompetitorModel {
@@ -20,16 +22,50 @@ public class CompetitorModel {
 
     @ManyToOne
     @JoinColumn(name = "tournamentID")
-    private CompetitorModel competitor;
+    private TorneioModel tournament;
+
+    @OneToMany(mappedBy = "competitor")
+    private List<ApostasModel> gambles;
+
+    @ManyToOne
+    @JoinColumn(name = "admimID")
+    private AdmimModel admim;
 
     public CompetitorModel() {
 
     }
 
-    public CompetitorModel(String competitorName, String competitorNumber, String competitorClassroom) {
+    public CompetitorModel(String competitorName, String competitorNumber, String competitorClassroom, TorneioModel tournament, List<ApostasModel> gambles, AdmimModel admim) {
         this.competitorName = competitorName;
         this.competitorNumber = competitorNumber;
         this.competitorClassroom = competitorClassroom;
+        this.tournament = tournament;
+        this.gambles = gambles;
+        this.admim = admim;
+    }
+
+    public AdmimModel getAdmim() {
+        return admim;
+    }
+
+    public void setAdmim(AdmimModel admim) {
+        this.admim = admim;
+    }
+
+    public TorneioModel getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(TorneioModel tournament) {
+        this.tournament = tournament;
+    }
+
+    public List<ApostasModel> getGambles() {
+        return gambles;
+    }
+
+    public void setGambles(List<ApostasModel> gambles) {
+        this.gambles = gambles;
     }
 
     public String getCompetitorName() {
