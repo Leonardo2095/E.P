@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 public class ApostasModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long gambleID;
+
     @Column(nullable = false)
     private float gambleValue;
     @Column(nullable = false)

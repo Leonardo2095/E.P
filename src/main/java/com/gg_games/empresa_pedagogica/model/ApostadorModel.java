@@ -15,7 +15,7 @@ public class ApostadorModel {
 
     @Column(nullable = false)
     private String gamblerName;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String gamblerClassroom;
     @Column(nullable = false)
     private String gamblerPassword;

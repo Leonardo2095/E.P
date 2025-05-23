@@ -5,9 +5,6 @@ public class ApostadorDTO {
     private String gamblerClassroom;
     private String gamblerPix;
 
-    public ApostadorDTO(String gamblerPix, String gamblerName, String gamblerClassroom) {
-    }
-
     public String getGamblerName() {
         return gamblerName;
     }

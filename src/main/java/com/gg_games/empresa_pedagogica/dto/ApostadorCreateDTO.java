@@ -19,6 +19,13 @@ public class ApostadorCreateDTO {
     @NotBlank(message = "A chave Pix não pode estar em branco")
     private String gamblerPix;
 
+    public ApostadorCreateDTO(String gamblerName, String gamblerClassroom, String gamblerPassword, String gamblerPix) {
+        this.gamblerName = gamblerName;
+        this.gamblerClassroom = gamblerClassroom;
+        this.gamblerPassword = gamblerPassword;
+        this.gamblerPix = gamblerPix;
+    }
+
     public String getGamblerName() {
         return gamblerName;
     }

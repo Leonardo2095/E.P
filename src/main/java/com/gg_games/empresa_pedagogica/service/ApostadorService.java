@@ -4,6 +4,7 @@ import com.gg_games.empresa_pedagogica.dto.ApostadorCreateDTO;
 import com.gg_games.empresa_pedagogica.dto.ApostadorDTO;
 import com.gg_games.empresa_pedagogica.model.ApostadorModel;
 import com.gg_games.empresa_pedagogica.repository.ApostadorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,21 +29,27 @@ public class ApostadorService {
         return apostadorRepository.save(apostador);
     }
 
-    public Optional<ApostadorDTO> update (Long id, ApostadorCreateDTO updateDTO){
-        return apostadorRepository.findById(id)
-                .map(apostador -> {
-                    apostador.setGamblerName(updateDTO.getGamblerName());
-                    apostador.setGamblerClassroom(updateDTO.getGamblerClassroom());
-                    apostador.setGamblerPassword(updateDTO.getGamblerPassword());
-                    apostador.setGamblerPix(updateDTO.getGamblerPix());
-                    ApostadorModel apostadorUpdated = apostadorRepository.save(apostador);
+    public void update(Long id, ApostadorCreateDTO dto){
+        ApostadorModel apostador = apostadorRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Apostador não encontrado"));
 
-                    return new ApostadorDTO(
-                            apostadorUpdated.getGamblerPix(),
-                            apostadorUpdated.getGamblerName(),
-                            apostadorUpdated.getGamblerClassroom()
-                    );
-                });
+        if(dto.getGamblerClassroom() != null){
+            dto.setGamblerClassroom(dto.getGamblerClassroom());
+        }
+
+        if (dto.getGamblerName() != null){
+            dto.setGamblerName(dto.getGamblerName());
+        }
+
+        if (dto.getGamblerPassword() != null){
+            dto.setGamblerPassword(dto.getGamblerPassword());
+        }
+
+        if (dto.getGamblerPix() != null){
+            dto.setGamblerPix(dto.getGamblerPix());
+        }
+
+        apostadorRepository.save(apostador);
     }
 
 }
