@@ -22,8 +22,8 @@ public class ApostadorController {
     }
 
     @PostMapping("/registro")
-    public ResponseEntity <Void> create(@RequestBody @Valid ApostadorCreateDTO dto) {
-        ApostadorModel gambler = apostadorService.save(dto);
+    public ResponseEntity <Void> create(@RequestBody ApostadorCreateDTO dto) {
+        ApostadorDTO gambler = apostadorService.save(dto);
 
         return ResponseEntity.noContent().build();
 
@@ -33,7 +33,7 @@ public class ApostadorController {
     @PatchMapping("/atualizar/{id}")
     public ResponseEntity<Void> updateApostador(
             @PathVariable Long id,
-            @RequestBody @Valid ApostadorCreateDTO dto)
+            @RequestBody ApostadorCreateDTO dto)
         {apostadorService.update(id, dto);
         return ResponseEntity.noContent().build();
         }

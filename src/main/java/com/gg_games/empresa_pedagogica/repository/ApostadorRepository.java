@@ -1,5 +1,6 @@
 package com.gg_games.empresa_pedagogica.repository;
 
+import com.gg_games.empresa_pedagogica.dto.ApostadorDTO;
 import com.gg_games.empresa_pedagogica.model.ApostadorModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +15,7 @@ public interface ApostadorRepository  extends JpaRepository <ApostadorModel, Lon
 
     @Override
     Optional<ApostadorModel> findById(Long aLong);
+
 
 
 }

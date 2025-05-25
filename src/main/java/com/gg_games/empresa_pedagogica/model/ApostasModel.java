@@ -28,6 +28,8 @@ public class ApostasModel {
     @ManyToOne
     @JoinColumn(name = "admimID")
     private AdmimModel admim;
+
+
     private LocalDateTime dateTime;
 
 
@@ -81,5 +83,19 @@ public class ApostasModel {
         this.gambleState = gambleState;
     }
 
+    public Long getGambleID() {
+        return gambleID;
+    }
 
+    public void setGambleID(Long gambleID) {
+        this.gambleID = gambleID;
+    }
+
+    public AdmimModel getAdmim() {
+        return admim;
+    }
+
+    public void setAdmim(AdmimModel admim) {
+        this.admim = admim;
+    }
 }

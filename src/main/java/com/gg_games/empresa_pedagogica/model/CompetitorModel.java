@@ -1,12 +1,13 @@
 package com.gg_games.empresa_pedagogica.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
 @Entity
 @Table(name= "tb_competitor")
-public class CompetitorModel {
+public class CompetitorModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long competitorId;
@@ -42,6 +43,7 @@ public class CompetitorModel {
         this.tournament = tournament;
         this.gambles = gambles;
         this.admim = admim;
+        this.paymentStatus = "Devendo";
     }
 
     public AdmimModel getAdmim() {

@@ -7,9 +7,6 @@ import com.gg_games.empresa_pedagogica.repository.ApostadorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class ApostadorService {
@@ -19,17 +16,18 @@ public class ApostadorService {
         this.apostadorRepository = apostadorRepository;
     }
 
-    public ApostadorModel save (ApostadorCreateDTO createDTO ){
+    public ApostadorDTO save (ApostadorCreateDTO createDTO ){
         ApostadorModel apostador = new ApostadorModel();
         apostador.setGamblerName(createDTO.getGamblerName());
         apostador.setGamblerClassroom(createDTO.getGamblerClassroom());
         apostador.setGamblerPassword(createDTO.getGamblerPassword());
         apostador.setGamblerPix(createDTO.getGamblerPix());
+        apostadorRepository.save(apostador);
 
-        return apostadorRepository.save(apostador);
+        return new ApostadorDTO(apostador);
     }
 
-    public void update(Long id, ApostadorCreateDTO dto){
+    public ApostadorModel update(Long id, ApostadorCreateDTO dto){
         ApostadorModel apostador = apostadorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Apostador não encontrado"));
 
@@ -49,7 +47,7 @@ public class ApostadorService {
             dto.setGamblerPix(dto.getGamblerPix());
         }
 
-        apostadorRepository.save(apostador);
+        return apostadorRepository.save(apostador);
     }
 
 }
