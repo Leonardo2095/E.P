@@ -1,4 +1,4 @@
-package com.gg_games.empresa_pedagogica.model;
+package com.gg_games.empresa_pedagogica.controller;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_post")
-public class PostModel {
+public class PostController {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postID;
@@ -18,25 +18,12 @@ public class PostModel {
 
     private LocalDate postData;
 
-    @ManyToOne
-    @JoinColumn(name = "userID")
-    private UserModel user;
-
-    public PostModel() {
+    public PostController() {
     }
 
-    public PostModel(String postTitle, String postContent, UserModel user) {
+    public PostController(String postTitle, String postContent) {
         this.postTitle = postTitle;
         this.postContent = postContent;
-        this.user = user;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
     }
 
     public Long getPostID() {
