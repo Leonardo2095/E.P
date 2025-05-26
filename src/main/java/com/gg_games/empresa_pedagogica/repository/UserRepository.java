@@ -1,28 +1,29 @@
 package com.gg_games.empresa_pedagogica.repository;
 
-import com.gg_games.empresa_pedagogica.model.ApostasModel;
+import com.gg_games.empresa_pedagogica.model.UserModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ApostasRepository extends JpaRepository<ApostasModel, Long> {
-
+public interface UserRepository extends JpaRepository <UserModel, Long> {
     @Override
-    <S extends ApostasModel> S save(S ApostasModel);
+    <S extends UserModel> S save(S UserModel);
 
-    List<ApostasModel> findAllByUser_UserID(Long userid);
+
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE tb_apostas SET gambleState = :status WHERE gambleID = :id", nativeQuery = true)
-    void atualizarStatus(@Param("id") Long id, @Param("status") String status);
+    void deleteById(Long id);
 
+
+    UserDetails findByUserName(String userName);
 
 
 }

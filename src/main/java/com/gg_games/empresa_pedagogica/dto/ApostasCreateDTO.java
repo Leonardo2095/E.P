@@ -3,7 +3,7 @@ package com.gg_games.empresa_pedagogica.dto;
 public class ApostasCreateDTO {
 
     private Long competitorID;
-    private Long gamblerID;
+    private Long userID;
     private Long gambleID;
     private float gambleValue;
     private String gambleState;
@@ -13,12 +13,12 @@ public class ApostasCreateDTO {
         return competitorID;
     }
 
-    public Long getGamblerID() {
-        return gamblerID;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setGamblerID(Long gamblerID) {
-        this.gamblerID = gamblerID;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public void setCompetitorID(Long competitorID) {

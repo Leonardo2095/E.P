@@ -18,16 +18,12 @@ public class ApostasModel {
     private String gambleState = "Nao foi paga";
 
     @ManyToOne
-    @JoinColumn(name = "gamblerID")
-    private ApostadorModel gambler;
+    @JoinColumn(name = "userID")
+    private UserModel user;
 
     @ManyToOne
     @JoinColumn(name = "competitorID")
     private CompetitorModel competitor;
-
-    @ManyToOne
-    @JoinColumn(name = "admimID")
-    private AdmimModel admim;
 
 
     private LocalDateTime dateTime;
@@ -36,19 +32,19 @@ public class ApostasModel {
     public ApostasModel() {
     }
 
-    public ApostasModel(float gambleValue, ApostadorModel gambler, CompetitorModel competitor, AdmimModel admim) {
+    public ApostasModel(float gambleValue, UserModel gambler, CompetitorModel competitor, UserModel user) {
         this.gambleValue = gambleValue;
-        this.gambler = gambler;
         this.competitor = competitor;
-        this.admim = admim;
+        this.user = user;
     }
 
-    public ApostadorModel getGambler() {
-        return gambler;
+
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setGambler(ApostadorModel gambler) {
-        this.gambler = gambler;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
     public CompetitorModel getCompetitor() {
@@ -91,11 +87,5 @@ public class ApostasModel {
         this.gambleID = gambleID;
     }
 
-    public AdmimModel getAdmim() {
-        return admim;
-    }
 
-    public void setAdmim(AdmimModel admim) {
-        this.admim = admim;
-    }
 }

@@ -19,24 +19,24 @@ public class PostModel {
     private LocalDate postData;
 
     @ManyToOne
-    @JoinColumn(name = "admimID")
-    private AdmimModel admim;
+    @JoinColumn(name = "userID")
+    private UserModel user;
 
     public PostModel() {
     }
 
-    public PostModel(String postTitle, String postContent, AdmimModel admim) {
+    public PostModel(String postTitle, String postContent, UserModel user) {
         this.postTitle = postTitle;
         this.postContent = postContent;
-        this.admim = admim;
+        this.user = user;
     }
 
-    public AdmimModel getAdmim() {
-        return admim;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setAdmim(AdmimModel admim) {
-        this.admim = admim;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
     public Long getPostID() {

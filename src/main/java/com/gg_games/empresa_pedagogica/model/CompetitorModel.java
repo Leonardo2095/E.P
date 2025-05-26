@@ -29,29 +29,29 @@ public class CompetitorModel{
     private List<ApostasModel> gambles;
 
     @ManyToOne
-    @JoinColumn(name = "admimID")
-    private AdmimModel admim;
+    @JoinColumn(name = "userID")
+    private UserModel user;
 
     public CompetitorModel() {
 
     }
 
-    public CompetitorModel(String competitorName, String competitorNumber, String competitorClassroom, TorneioModel tournament, List<ApostasModel> gambles, AdmimModel admim) {
+    public CompetitorModel(String competitorName, String competitorNumber, String competitorClassroom, TorneioModel tournament, List<ApostasModel> gambles, UserModel user) {
         this.competitorName = competitorName;
         this.competitorNumber = competitorNumber;
         this.competitorClassroom = competitorClassroom;
         this.tournament = tournament;
         this.gambles = gambles;
-        this.admim = admim;
+        this.user = user;
         this.paymentStatus = "Devendo";
     }
 
-    public AdmimModel getAdmim() {
-        return admim;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setAdmim(AdmimModel admim) {
-        this.admim = admim;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
     public TorneioModel getTournament() {

@@ -20,25 +20,25 @@ public class TorneioModel {
     private List<CompetitorModel> competitor;
 
     @ManyToOne
-    @JoinColumn(name = "admimID")
-    private AdmimModel admim;
+    @JoinColumn(name = "userID")
+    private UserModel user;
     public TorneioModel(){
     }
 
 
-    public TorneioModel(String data, String rules, List<CompetitorModel> competitor, AdmimModel admim) {
+    public TorneioModel(String data, String rules, List<CompetitorModel> competitor, UserModel user) {
         this.data = data;
         this.rules = rules;
         this.competitor = competitor;
-        this.admim = admim;
+        this.user= user;
     }
 
-    public AdmimModel getAdmim() {
-        return admim;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setAdmim(AdmimModel admim) {
-        this.admim = admim;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
     public List<CompetitorModel> getCompetitor() {
