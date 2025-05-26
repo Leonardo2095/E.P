@@ -6,6 +6,8 @@ import com.gg_games.empresa_pedagogica.model.ApostasModel;
 import com.gg_games.empresa_pedagogica.model.UserModel;
 import com.gg_games.empresa_pedagogica.repository.UserRepository;
 import com.gg_games.empresa_pedagogica.service.ApostasService;
+import com.gg_games.empresa_pedagogica.service.AuthService;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,26 +24,12 @@ import java.util.List;
 public class ApostasController {
     ApostasService apostasService;
     UserRepository userRepository;
+    AuthService authService;
 
-    public ApostasController(ApostasService apostasService, UserRepository userRepository) {
+    public ApostasController(ApostasService apostasService, UserRepository userRepository, AuthService authService) {
         this.apostasService = apostasService;
         this.userRepository = userRepository;
-    }
-
-    private UserModel getUsuarioAutenticado() throws AccessDeniedException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !authentication.isAuthenticated()) {
-            throw new AccessDeniedException("Usuário não autenticado");
-        }
-
-        Object principal = authentication.getPrincipal();
-
-        if (principal instanceof UserModel user) {
-            return user;
-        }
-
-        throw new AccessDeniedException("Usuário autenticado inválido");
+        this.authService = authService;
     }
 
     @PostMapping("/apostar")
@@ -50,21 +38,30 @@ public class ApostasController {
         return  ResponseEntity.status(HttpStatus.CREATED).body(aposta);
     }
 
-    @GetMapping("/historico/{userID}")
-    @PreAuthorize("hasRole('ADMIN') or #userID == principal.userID")
+    @GetMapping("/admin/historico/{userID}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<ApostasDTO>> findAllByUser_UserID(@PathVariable Long userID) {
+        List<ApostasDTO> apostas = apostasService.listar(userID);
+        return ResponseEntity.ok(apostas);
+    }
+
+    @GetMapping("/historico/{userID}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<ApostasDTO>> findAllByUser_UserID_User(@PathVariable Long userID) throws AccessDeniedException {
+        UserModel userModel = authService.getUsuarioAutenticado();
+
         List<ApostasDTO> apostas = apostasService.listar(userID);
         return ResponseEntity.ok(apostas);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/seeall/")
-    public ResponseEntity<List<ApostasDTO>> listarTodasApostas(Principal principal) throws AccessDeniedException {
+    public ResponseEntity<List<ApostasDTO>> listarTodasApostas() throws AccessDeniedException {
 
-        UserModel user = getUsuarioAutenticado();
-        List<ApostasDTO> apostasDTO = apostasService.listarTodasApostas(user)
+
+        List<ApostasDTO> apostasDTO = apostasService.listarTodasApostas()
                 .stream()
-                .map(ApostasDTO::new) // Construtor que converte de ApostasModel para ApostasDTO
+                .map(ApostasDTO::new) //
                 .toList();
 
         return ResponseEntity.ok(apostasDTO);

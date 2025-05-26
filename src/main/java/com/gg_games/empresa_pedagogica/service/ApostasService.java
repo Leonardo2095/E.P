@@ -54,10 +54,8 @@ public class ApostasService {
                 .collect(Collectors.toList());
     }
 
-    public List<ApostasModel> listarTodasApostas(UserModel user) throws AccessDeniedException {
-        if (user.getRole() != UserRoles.ADMIN) {
-            throw new AccessDeniedException("Somente admins podem ver todas as apostas");
-        }
+    public List<ApostasModel> listarTodasApostas()  {
+
         return apostasRepository.findAll();
     }
 

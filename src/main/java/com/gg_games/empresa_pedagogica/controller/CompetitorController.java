@@ -7,7 +7,10 @@ import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/competidor")
@@ -25,4 +28,22 @@ public class CompetitorController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(competitor);
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/listAll")
+    ResponseEntity <List<CompetitorDTO>> listAll () {
+        List<CompetitorDTO> list = competitorService.findAll();
+
+        return ResponseEntity.ok(list);
+
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/admin/delete/{competitorID}")
+    public ResponseEntity<Void> delete (@PathVariable Long competitorID){
+        competitorService.delete(competitorID);
+
+        return  ResponseEntity.ok().build();
+    }
+
 }

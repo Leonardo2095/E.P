@@ -17,11 +17,8 @@ public interface UserRepository extends JpaRepository <UserModel, Long> {
     <S extends UserModel> S save(S UserModel);
 
 
-
-    @Modifying
-    @Transactional
-    void deleteById(Long id);
-
+    @Override
+    void deleteById(Long userID);
 
     UserDetails findByUserName(String userName);
 

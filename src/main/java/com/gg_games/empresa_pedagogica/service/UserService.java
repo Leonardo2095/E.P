@@ -2,6 +2,7 @@ package com.gg_games.empresa_pedagogica.service;
 
 import com.gg_games.empresa_pedagogica.dto.UserDTO;
 import com.gg_games.empresa_pedagogica.model.UserModel;
+import com.gg_games.empresa_pedagogica.model.UserRoles;
 import com.gg_games.empresa_pedagogica.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +26,16 @@ public class UserService {
     public UserModel findById (Long userID){
         return  userRepository.findById(userID)
                 .orElseThrow(() -> new RuntimeException("Usuario Inexistente"));
+    }
+
+    public String delete(Long userID, UserModel user){
+        if ((user.getRole()) != UserRoles.USER){
+            return "Uso exclusivo de admin";
+        }
+
+        userRepository.deleteById(userID);
+
+        return "Usuario de id " + userID + " deletetado";
     }
 
     public UserModel update(Long id, UserDTO dto){
