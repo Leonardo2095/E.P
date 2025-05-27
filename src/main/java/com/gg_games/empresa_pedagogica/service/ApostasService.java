@@ -54,10 +54,13 @@ public class ApostasService {
                 .collect(Collectors.toList());
     }
 
-    public List<ApostasModel> listarTodasApostas()  {
+    public List<ApostasDTO> listarTodasApostas()  {
 
-        return apostasRepository.findAll();
+        List<ApostasModel> apostas = apostasRepository.findAll();
+
+        return apostas.stream()
+                .map(ApostasDTO::new)
+                .collect(Collectors.toList());
     }
-
 
 }

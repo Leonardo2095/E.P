@@ -48,7 +48,7 @@ public class ApostasController {
     @GetMapping("/historico/{userID}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<ApostasDTO>> findAllByUser_UserID_User(@PathVariable Long userID) throws AccessDeniedException {
-        UserModel userModel = authService.getUsuarioAutenticado();
+
 
         List<ApostasDTO> apostas = apostasService.listar(userID);
         return ResponseEntity.ok(apostas);
@@ -59,10 +59,7 @@ public class ApostasController {
     public ResponseEntity<List<ApostasDTO>> listarTodasApostas() throws AccessDeniedException {
 
 
-        List<ApostasDTO> apostasDTO = apostasService.listarTodasApostas()
-                .stream()
-                .map(ApostasDTO::new) //
-                .toList();
+        List<ApostasDTO> apostas = apostasService.listarTodasApostas();
 
-        return ResponseEntity.ok(apostasDTO);
+        return ResponseEntity.ok(apostas);
 }}

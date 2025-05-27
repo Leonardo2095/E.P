@@ -2,6 +2,7 @@ package com.gg_games.empresa_pedagogica.repository;
 
 import com.gg_games.empresa_pedagogica.model.ApostasModel;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,9 @@ public interface ApostasRepository extends JpaRepository<ApostasModel, Long> {
     <S extends ApostasModel> S save(S ApostasModel);
 
     List<ApostasModel> findAllByUser_UserID(Long userid);
+
+    @Override
+    List<ApostasModel> findAll();
 
     @Modifying
     @Transactional
